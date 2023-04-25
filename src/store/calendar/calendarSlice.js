@@ -24,15 +24,30 @@ export const calendarSlice = createSlice({
 
   },
   reducers: {
-    onSetActiveEvent: (state, { payload }) =>{
+    onSetActiveEvent: (state, { payload }) => {
       state.activeEvent = payload
     },
-    onAddNewEvent: (state, { payload }) =>{
+    onAddNewEvent: (state, { payload }) => {
       state.events.push( payload )
       state.activeEvent = null
-    }
-
+    },
+    onUpdateEvent: (state, { payload }) => {
+      state.events = state.events.map(( event)=>{
+        if(payload._id === event._id){
+          return payload;
+        }
+         return event
+      })
+    },
+    onDeleteEvent: ( state ) => {
+      if( state.activeEvent ){
+        state.events = state.events.filter((event)=>{
+          event._id !== state.activeEvent._id
+        })
+        state.activeEvent = null
+      }
+    },
   }
 });
 
-export const { onSetActiveEvent, onAddNewEvent } = calendarSlice.actions
+export const { onSetActiveEvent, onAddNewEvent, onUpdateEvent, onDeleteEvent } = calendarSlice.actions
