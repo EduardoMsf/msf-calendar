@@ -8,24 +8,26 @@ import { CalendarEvent, CalendarModal, Navbar } from "../"
 import { getMessagesEs, localizer } from '../../helpers'
 import { useState } from 'react'
 import { useUiStore } from '../../hooks'
+import { useCalendarStore } from '../../hooks'
 
-const events = [{
-  title: "Cumpleaños de Elizabeth",
-  notes: "Pastel",
-  start: new Date(),
-  end: addHours( new Date(), 2),
-  bgColor: "#fafafa",
-  user: {
-    _id: 123,
-    name: "Eduardo"
-  }
-}]
+// const events = [{
+//   title: "Cumpleaños de Elizabeth",
+//   notes: "Pastel",
+//   start: new Date(),
+//   end: addHours( new Date(), 2),
+//   bgColor: "#fafafa",
+//   user: {
+//     _id: 123,
+//     name: "Eduardo"
+//   }
+// }]
 
 
 export const CalendarPage = () => {
 
   const [lastView, setLastView] = useState(localStorage.getItem('lastView') || 'week')
   const { openDateModal, toggleDateModal } = useUiStore()
+  const { events, setActiveEvent } = useCalendarStore()
 
   const eventStyleGetter = ( event, start, end, isSelected ) =>{
 
@@ -48,6 +50,7 @@ export const CalendarPage = () => {
 
   const onSelect = ( event ) =>{
     console.log({select: event});
+    setActiveEvent(event)
   }
 
   const onViewChange = ( event ) =>{
