@@ -49,7 +49,7 @@ export const CalendarPage = () => {
   }
 
   const onSelect = ( event ) =>{
-    console.log({select: event});
+    
     setActiveEvent(event)
   }
 

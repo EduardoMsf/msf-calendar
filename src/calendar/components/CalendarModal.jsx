@@ -52,7 +52,7 @@ export const CalendarModal = () => {
     if( activeEvent !== null){
       setFormValues({...activeEvent})
     }
-    console.log(formValues)
+    
     
   }, [activeEvent])
   
@@ -62,7 +62,7 @@ export const CalendarModal = () => {
         ...formValues,
         [target.name]: target.value
     })
-    console.log({formValues});
+    
   }
 
   const onCloseModal = () =>{
